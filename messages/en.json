@@ -110,7 +110,11 @@
     "modified2": "Modified",
     "errorParsing": "Error parsing file",
     "errorJson": "Invalid JSON format",
-    "errorCsv": "Error parsing CSV"
+    "errorCsv": "Error parsing CSV",
+    "errorFileTooLarge": "File is too large. Maximum size is 10MB.",
+    "errorUnsupportedFormat": "Unsupported file format.",
+    "errorEmptyInput": "Please enter text to compare",
+    "exportSuccess": "Diff exported successfully"
   },
   "about": {
     "heroTitle": "About Diff Shuttle",

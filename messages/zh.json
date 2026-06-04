@@ -110,7 +110,11 @@
     "modified2": "已修改",
     "errorParsing": "解析文件错误",
     "errorJson": "无效的 JSON 格式",
-    "errorCsv": "解析 CSV 错误"
+    "errorCsv": "解析 CSV 错误",
+    "errorFileTooLarge": "文件过大，最大支持 10MB。",
+    "errorUnsupportedFormat": "不支持的文件格式。",
+    "errorEmptyInput": "请输入要对比的文本",
+    "exportSuccess": "差异导出成功"
   },
   "about": {
     "heroTitle": "关于 Diff Shuttle",

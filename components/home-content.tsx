@@ -44,7 +44,7 @@ export function HomeContent() {
 
   const handleCompare = useCallback(() => {
     if (!original.trim() && !modified.trim()) {
-      toast.error("Please enter text to compare");
+      toast.error(tDiff("errorEmptyInput"));
       return;
     }
 
@@ -53,7 +53,7 @@ export function HomeContent() {
       ignoreCase,
     });
     setResult(diffResult);
-  }, [original, modified, mode, ignoreWhitespace, ignoreCase]);
+  }, [original, modified, mode, ignoreWhitespace, ignoreCase, tDiff]);
 
   const handleSwap = useCallback(() => {
     setOriginal(modified);
@@ -94,8 +94,8 @@ export function HomeContent() {
     a.download = "diff-result.txt";
     a.click();
     URL.revokeObjectURL(url);
-    toast.success("Diff exported successfully");
-  }, [result]);
+    toast.success(tDiff("exportSuccess"));
+  }, [result, tDiff]);
 
   const features = [
     {
@@ -150,10 +150,10 @@ export function HomeContent() {
           <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             {t("subtitle")}
           </p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" onClick={() => document.getElementById("diff-tool")?.scrollIntoView({ behavior: "smooth" })}>
               {t("cta")}
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="size-4" />
             </Button>
             <Button variant="outline" size="lg" onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}>
               {t("secondaryCta")}
@@ -188,8 +188,8 @@ export function HomeContent() {
           />
 
           <div className="flex justify-center">
-            <Button size="lg" onClick={handleCompare}>
-              <GitCompare className="mr-2 size-4" />
+            <Button size="lg" onClick={handleCompare} className="w-full sm:w-auto">
+              <GitCompare className="size-4" />
               {tDiff("compare")}
             </Button>
           </div>
