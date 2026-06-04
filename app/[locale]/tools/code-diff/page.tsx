@@ -1,9 +1,31 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link as LocaleLink } from "@/i18n/navigation";
 
 const PAGE_URL = "https://diff.shuttlelab.org/tools/code-diff/";
 
-export function generateMetadata(): Metadata {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (locale === "zh") {
+    const t = await getTranslations({ locale, namespace: "toolPages" });
+    return {
+      title: `${t("codeDiff.title")} | Diff Shuttle`,
+      description: t("codeDiff.subtitle"),
+      alternates: {
+        canonical: PAGE_URL,
+        languages: { en: PAGE_URL, zh: PAGE_URL, "x-default": PAGE_URL },
+      },
+    };
+  }
+
   return {
     title: "Code Diff Tool — Compare Code Online Free | Diff Shuttle",
     description:
@@ -26,7 +48,35 @@ export function generateMetadata(): Metadata {
   };
 }
 
-export default function CodeDiffPage() {
+export default async function CodeDiffPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  if (locale === "zh") {
+    const t = await getTranslations("toolPages");
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-16">
+        <h1 className="text-4xl font-bold mb-4">{t("codeDiff.title")}</h1>
+        <p className="text-lg text-muted-foreground mb-8">
+          {t("codeDiff.subtitle")}
+        </p>
+        <div className="text-center p-8 bg-muted rounded-lg">
+          <LocaleLink
+            href="/"
+            className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity"
+          >
+            {t("openTool")}
+          </LocaleLink>
+        </div>
+        <p className="mt-8 text-center text-sm text-muted-foreground">
+          <Link href="/tools/code-diff/" className="hover:underline">
+            {t("fullGuide")}
+          </Link>
+        </p>
+      </div>
+    );
+  }
+
   const techArticleSchema = {
     "@context": "https://schema.org",
     "@type": "TechArticle",

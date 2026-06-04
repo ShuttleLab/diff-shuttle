@@ -203,5 +203,29 @@
     "textDiff": "Text Diff",
     "codeDiff": "Code Diff",
     "jsonDiff": "JSON Diff"
+  },
+  "toolPages": {
+    "openTool": "Open the Diff Tool",
+    "fullGuide": "View the full English guide",
+    "textDiff": {
+      "title": "Text Diff Tool",
+      "subtitle": "Compare two pieces of text side by side and highlight every difference line by line."
+    },
+    "codeDiff": {
+      "title": "Code Diff Tool",
+      "subtitle": "Compare two code snippets or source files and see every added, removed, and unchanged line."
+    },
+    "jsonDiff": {
+      "title": "JSON Diff Tool",
+      "subtitle": "Auto-format and compare two JSON documents so structural changes stand out."
+    },
+    "csvDiff": {
+      "title": "CSV Diff Tool",
+      "subtitle": "Compare two CSV files and spot added, removed, and changed rows instantly."
+    },
+    "imageDiff": {
+      "title": "Image Diff (Coming Soon)",
+      "subtitle": "A visual image comparison tool is on the roadmap and not available yet. For now, compare image source such as SVG markup with the text diff tool."
+    }
   }
 }

@@ -203,5 +203,29 @@
     "textDiff": "文本对比",
     "codeDiff": "代码对比",
     "jsonDiff": "JSON 对比"
+  },
+  "toolPages": {
+    "openTool": "打开对比工具",
+    "fullGuide": "查看完整英文指南",
+    "textDiff": {
+      "title": "文本对比",
+      "subtitle": "并排对比两段文本，逐行高亮显示差异。"
+    },
+    "codeDiff": {
+      "title": "代码对比",
+      "subtitle": "对比两段代码或源文件，逐行查看新增、删除和未改动的内容。"
+    },
+    "jsonDiff": {
+      "title": "JSON 对比",
+      "subtitle": "自动格式化并对比两份 JSON，让结构性变化一目了然。"
+    },
+    "csvDiff": {
+      "title": "CSV 对比",
+      "subtitle": "对比两个 CSV 文件，即时发现新增、删除和改动的行。"
+    },
+    "imageDiff": {
+      "title": "图片对比（即将推出）",
+      "subtitle": "可视化图片对比功能正在开发中，暂未上线。目前可先用文本对比工具比较 SVG 等图片源码。"
+    }
   }
 }
