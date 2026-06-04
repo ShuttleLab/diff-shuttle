@@ -13,7 +13,6 @@ import {
   UserCheck,
   Sparkles,
   GitCompare,
-  ArrowRight,
   Lock,
 } from "lucide-react";
 import { DiffEditor } from "@/components/diff-editor";
@@ -138,32 +137,23 @@ export function HomeContent() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="py-16 sm:py-24 px-4">
+      {/* Hero (compact) */}
+      <section className="pt-8 pb-4 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <Badge variant="secondary" className="mb-4">
+          <Badge variant="secondary" className="mb-3">
             {t("privacyBadge")}
           </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">
             {t("title")}
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             {t("subtitle")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" onClick={() => document.getElementById("diff-tool")?.scrollIntoView({ behavior: "smooth" })}>
-              {t("cta")}
-              <ArrowRight className="size-4" />
-            </Button>
-            <Button variant="outline" size="lg" onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}>
-              {t("secondaryCta")}
-            </Button>
-          </div>
         </div>
       </section>
 
       {/* Diff Tool */}
-      <section id="diff-tool" className="py-12 px-4">
+      <section id="diff-tool" className="pt-4 pb-12 px-4">
         <div className="max-w-7xl mx-auto space-y-6">
           <DiffControls
             mode={mode}
