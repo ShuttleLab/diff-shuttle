@@ -63,7 +63,18 @@ export default function Footer() {
               Note Shuttle
             </a>
             <span className="text-muted-foreground text-xs">
-              {t("common.alsoFromNote")}
+              {t("common.notePromoDesc")}
+            </span>
+            <span className="text-muted-foreground/30">|</span>
+            <a
+              href="https://status.shuttlelab.org"
+              rel="noopener"
+              className="font-semibold text-foreground hover:text-primary transition-colors"
+            >
+              Status Shuttle
+            </a>
+            <span className="text-muted-foreground text-xs">
+              {t("common.statusPromoDesc")}
             </span>
           </p>
           <p>

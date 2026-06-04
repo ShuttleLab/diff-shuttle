@@ -33,7 +33,9 @@
     "error": "错误",
     "success": "成功",
     "alsoFrom": "同属 ShuttleLab",
-    "alsoFromNote": "Markdown 编辑器与分享"
+    "alsoFromNote": "Markdown 编辑器与分享",
+    "notePromoDesc": "Markdown 编辑与分享",
+    "statusPromoDesc": "可用性监控与告警"
   },
   "home": {
     "title": "Diff Shuttle",

@@ -33,7 +33,9 @@
     "error": "Error",
     "success": "Success",
     "alsoFrom": "Also from ShuttleLab",
-    "alsoFromNote": "Markdown editor & sharing"
+    "alsoFromNote": "Markdown editor & sharing",
+    "notePromoDesc": "Markdown editor & sharing",
+    "statusPromoDesc": "Uptime monitoring & alerts"
   },
   "home": {
     "title": "Diff Shuttle",
