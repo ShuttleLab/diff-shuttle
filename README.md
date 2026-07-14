@@ -2,6 +2,8 @@
 
 A small web app to compare text, code, JSON, and CSV side by side. Everything runs in the browser; no data is sent to any server.
 
+**🔗 Try it live: [Free online text & code diff checker](https://diff.shuttlelab.org)** — compare text, code, JSON & CSV side by side in your browser.
+
 ## Features
 
 - **Five diff modes** – line, word, character, JSON, and CSV comparison via the npm [diff](https://github.com/kpdecker/jsdiff) library
