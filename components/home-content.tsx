@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -12,7 +11,6 @@ import {
   Upload,
   UserCheck,
   Sparkles,
-  GitCompare,
   Lock,
 } from "lucide-react";
 import { DiffEditor } from "@/components/diff-editor";
@@ -40,31 +38,34 @@ export function HomeContent() {
   const [ignoreWhitespace, setIgnoreWhitespace] = useState(false);
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [result, setResult] = useState<DiffResult | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
+  const hadResultRef = useRef(false);
 
-  const handleCompare = useCallback(() => {
-    if (!original.trim() && !modified.trim()) {
-      toast.error(tDiff("errorEmptyInput"));
-      return;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!original.trim() && !modified.trim()) {
+        setResult(null);
+        return;
+      }
+      setResult(
+        computeDiff(original, modified, mode, { ignoreWhitespace, ignoreCase })
+      );
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [original, modified, mode, ignoreWhitespace, ignoreCase]);
+
+  useEffect(() => {
+    if (result && !hadResultRef.current) {
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-
-    const diffResult = computeDiff(original, modified, mode, {
-      ignoreWhitespace,
-      ignoreCase,
-    });
-    setResult(diffResult);
-  }, [original, modified, mode, ignoreWhitespace, ignoreCase, tDiff]);
+    hadResultRef.current = !!result;
+  }, [result]);
 
   const handleSwap = useCallback(() => {
     setOriginal(modified);
     setModified(original);
-    if (result) {
-      const diffResult = computeDiff(modified, original, mode, {
-        ignoreWhitespace,
-        ignoreCase,
-      });
-      setResult(diffResult);
-    }
-  }, [original, modified, mode, ignoreWhitespace, ignoreCase, result]);
+  }, [original, modified]);
 
   const handleClear = useCallback(() => {
     setOriginal("");
@@ -177,15 +178,8 @@ export function HomeContent() {
             onFileLoad={handleFileLoad}
           />
 
-          <div className="flex justify-center">
-            <Button size="lg" onClick={handleCompare} className="w-full sm:w-auto">
-              <GitCompare className="size-4" />
-              {tDiff("compare")}
-            </Button>
-          </div>
-
           {result && (
-            <>
+            <div ref={resultRef} className="space-y-6 scroll-mt-4">
               <DiffStats
                 additions={result.stats.additions}
                 deletions={result.stats.deletions}
@@ -196,7 +190,7 @@ export function HomeContent() {
                 diffPercent={result.stats.diffPercent}
               />
               <DiffResultView result={result} viewMode={viewMode} />
-            </>
+            </div>
           )}
         </div>
       </section>

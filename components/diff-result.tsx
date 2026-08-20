@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 import type { DiffResult } from "@/lib/diff-engine";
 
@@ -98,71 +97,8 @@ export function DiffResultView({ result, viewMode }: DiffResultViewProps) {
           <div className="bg-muted px-3 py-2 text-sm font-medium border-b">
             {t("original")}
           </div>
-          <ScrollArea className="h-[400px]">
-            <pre className="text-sm font-mono">
-              {leftLines.map((line, i) => (
-                <div
-                  key={i}
-                  className={`flex ${getLineClassName(line.type)}`}
-                >
-                  <span
-                    className={`w-12 px-2 py-0.5 text-right shrink-0 select-none ${getLineNumberClassName(
-                      line.type
-                    )}`}
-                  >
-                    {line.oldLineNumber || ""}
-                  </span>
-                  <span className="w-6 px-1 py-0.5 text-center shrink-0 select-none text-muted-foreground">
-                    {getPrefix(line.type)}
-                  </span>
-                  <span className="flex-1 py-0.5 pr-2 whitespace-pre-wrap break-all">
-                    {line.content}
-                  </span>
-                </div>
-              ))}
-            </pre>
-          </ScrollArea>
-        </div>
-
-        <div>
-          <div className="bg-muted px-3 py-2 text-sm font-medium border-b">
-            {t("modified")}
-          </div>
-          <ScrollArea className="h-[400px]">
-            <pre className="text-sm font-mono">
-              {rightLines.map((line, i) => (
-                <div
-                  key={i}
-                  className={`flex ${getLineClassName(line.type)}`}
-                >
-                  <span
-                    className={`w-12 px-2 py-0.5 text-right shrink-0 select-none ${getLineNumberClassName(
-                      line.type
-                    )}`}
-                  >
-                    {line.newLineNumber || ""}
-                  </span>
-                  <span className="w-6 px-1 py-0.5 text-center shrink-0 select-none text-muted-foreground">
-                    {getPrefix(line.type)}
-                  </span>
-                  <span className="flex-1 py-0.5 pr-2 whitespace-pre-wrap break-all">
-                    {line.content}
-                  </span>
-                </div>
-              ))}
-            </pre>
-          </ScrollArea>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <Card>
-      <CardContent className="p-0">
-        <ScrollArea className="h-[400px]">
           <pre className="text-sm font-mono">
-            {unifiedLines.map((line, i) => (
+            {leftLines.map((line, i) => (
               <div
                 key={i}
                 className={`flex ${getLineClassName(line.type)}`}
@@ -174,6 +110,27 @@ export function DiffResultView({ result, viewMode }: DiffResultViewProps) {
                 >
                   {line.oldLineNumber || ""}
                 </span>
+                <span className="w-6 px-1 py-0.5 text-center shrink-0 select-none text-muted-foreground">
+                  {getPrefix(line.type)}
+                </span>
+                <span className="flex-1 py-0.5 pr-2 whitespace-pre-wrap break-all">
+                  {line.content}
+                </span>
+              </div>
+            ))}
+          </pre>
+        </div>
+
+        <div>
+          <div className="bg-muted px-3 py-2 text-sm font-medium border-b">
+            {t("modified")}
+          </div>
+          <pre className="text-sm font-mono">
+            {rightLines.map((line, i) => (
+              <div
+                key={i}
+                className={`flex ${getLineClassName(line.type)}`}
+              >
                 <span
                   className={`w-12 px-2 py-0.5 text-right shrink-0 select-none ${getLineNumberClassName(
                     line.type
@@ -190,7 +147,43 @@ export function DiffResultView({ result, viewMode }: DiffResultViewProps) {
               </div>
             ))}
           </pre>
-        </ScrollArea>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Card>
+      <CardContent className="p-0">
+        <pre className="text-sm font-mono">
+          {unifiedLines.map((line, i) => (
+            <div
+              key={i}
+              className={`flex ${getLineClassName(line.type)}`}
+            >
+              <span
+                className={`w-12 px-2 py-0.5 text-right shrink-0 select-none ${getLineNumberClassName(
+                  line.type
+                )}`}
+              >
+                {line.oldLineNumber || ""}
+              </span>
+              <span
+                className={`w-12 px-2 py-0.5 text-right shrink-0 select-none ${getLineNumberClassName(
+                  line.type
+                )}`}
+              >
+                {line.newLineNumber || ""}
+              </span>
+              <span className="w-6 px-1 py-0.5 text-center shrink-0 select-none text-muted-foreground">
+                {getPrefix(line.type)}
+              </span>
+              <span className="flex-1 py-0.5 pr-2 whitespace-pre-wrap break-all">
+                {line.content}
+              </span>
+            </div>
+          ))}
+        </pre>
       </CardContent>
     </Card>
   );
