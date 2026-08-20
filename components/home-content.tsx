@@ -39,7 +39,6 @@ export function HomeContent() {
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [result, setResult] = useState<DiffResult | null>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-  const hadResultRef = useRef(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,10 +55,9 @@ export function HomeContent() {
   }, [original, modified, mode, ignoreWhitespace, ignoreCase]);
 
   useEffect(() => {
-    if (result && !hadResultRef.current) {
+    if (result) {
       resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    hadResultRef.current = !!result;
   }, [result]);
 
   const handleSwap = useCallback(() => {
